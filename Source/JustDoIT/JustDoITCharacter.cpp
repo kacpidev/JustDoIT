@@ -5,6 +5,7 @@
 #include "JustDoITProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
+#include <Runtime/Engine/Public/Engine.h>
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -207,4 +208,15 @@ bool AJustDoITCharacter::EnableTouchscreenMovement(class UInputComponent* InputC
 		InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AJustDoITCharacter::TouchUpdate);
 	}
 	return bResult;
+}
+
+// Called every frame
+void AJustDoITCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("WE are using JustDoITCharacter :)"));
+	}
 }
