@@ -1,6 +1,7 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
+#include "JustDoITActor.h"
 #include "JustDoITCharacter.generated.h"
 
 struct FHitResult;
@@ -94,19 +95,8 @@ public:
 	UPROPERTY()
 	float InteractionRange;
 
-	UFUNCTION()
-		void OnStartInteraction();
-
-	UFUNCTION()
-		void OnFinishInteraction();
-
-	UFUNCTION()
-		void ToggleInteraction();
-
 	UPROPERTY()
 	AJustDoITActor* CurrentInteractableActor;
 
-	UPROPERTY()
-	bool bInteracts;
 };
 

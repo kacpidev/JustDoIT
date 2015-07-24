@@ -24,7 +24,12 @@ public:
 	// Called every frame
 	virtual void Tick (float DeltaSeconds) override;
 
-	void OnInteraction ();
+	UFUNCTION(BlueprintNativeEvent, Category = Interactable)
+		void OnInteraction(); 
+	UFUNCTION(BlueprintNativeEvent, Category = Interactable)
+		void OnStartPlayerLookAt();
+	UFUNCTION(BlueprintNativeEvent, Category = Interactable)
+		void OnFinishPlayerLookAt();
 
 
 public:

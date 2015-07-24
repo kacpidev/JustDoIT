@@ -6,6 +6,7 @@
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
 #include <Runtime/Engine/Public/Engine.h>
+#include <Runtime/CoreUObject/Public/Templates/Casts.h>
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -14,6 +15,8 @@ DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
 AJustDoITCharacter::AJustDoITCharacter()
 {
+	InteractionRange = 200.0f;
+
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -63,7 +66,10 @@ void AJustDoITCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 
 void AJustDoITCharacter::OnFire()
 { 
-	//OnClick action
+	if (CurrentInteractableActor)
+	{
+		CurrentInteractableActor->OnInteraction();
+	}
 }
 
 void AJustDoITCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
@@ -184,5 +190,38 @@ void AJustDoITCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	auto Item = Cast<AJustDoItActor>(Raycast(InteractionRange).GetActor());
+	auto Item = Cast<AJustDoITActor>(Raycast(InteractionRange).GetActor());
+
+	if (Item != CurrentInteractableActor)
+	{
+		if (CurrentInteractableActor)
+			CurrentInteractableActor->OnFinishPlayerLookAt();
+
+		CurrentInteractableActor = Item;
+
+		if (CurrentInteractableActor)
+			CurrentInteractableActor->OnStartPlayerLookAt();
+	}
+}
+
+#define COLLISION_TRACE ECC_GameTraceChannel1
+FHitResult AJustDoITCharacter::Raycast(float Range)
+{
+	FVector CameraLocation;
+	FRotator CameraRotation;
+	GetActorEyesViewPoint(CameraLocation, CameraRotation);
+	const FVector TraceDirection = CameraRotation.Vector();
+
+	FVector StartTrace;
+	StartTrace = CameraLocation + TraceDirection * ((GetActorLocation() - CameraLocation) | TraceDirection); // ?
+
+	const FVector EndTrace = StartTrace + TraceDirection * Range;
+
+	FHitResult HitResult;
+	FCollisionQueryParams TraceParams(FName("InteractionTrace"), true, this);
+	TraceParams.bTraceAsyncScene = true;
+
+	GetWorld()->LineTraceSingle(HitResult, StartTrace, EndTrace, COLLISION_TRACE, TraceParams);
+
+	return HitResult;
 }
