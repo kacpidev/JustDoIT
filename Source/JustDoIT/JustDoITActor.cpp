@@ -69,7 +69,7 @@ void AJustDoITActor::Tick( float DeltaTime )
 	}
 }
 
-void JustDoItActor::OnInteraction () {
+void AJustDoITActor::OnInteraction () {
 	//TODO
 
 }
