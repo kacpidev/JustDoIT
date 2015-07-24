@@ -179,3 +179,10 @@ void AJustDoITCharacter::BeginPlay()
 		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("WE are using JustDoITCharacter :)"));
 	}
 }
+
+void AJustDoITCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	auto Item = Cast<AJustDoItActor>(Raycast(InteractionRange).GetActor());
+}
