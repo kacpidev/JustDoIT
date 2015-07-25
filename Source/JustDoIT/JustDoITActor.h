@@ -29,8 +29,8 @@ public:
 
 
 public:
-	UPROPERTY()
-	int32 ActorState;
+	UPROPERTY(BlueprintReadWrite)
+	bool ActorState;
 	UPROPERTY(BlueprintReadWrite)
 	int32 ProblemType;
 };
