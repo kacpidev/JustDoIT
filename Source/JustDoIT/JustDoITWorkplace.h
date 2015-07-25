@@ -20,7 +20,8 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
-
+	
+	UFUNCTION(BlueprintNativeEvent)
 	bool IsWorking();
 
 	void GenerateIssue();
@@ -41,4 +42,6 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 		AJustDoITActor* Switch;
 
+	UPROPERTY(BlueprintReadWrite)
+		bool bIsWorking;
 };

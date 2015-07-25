@@ -52,12 +52,12 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 		UpdateMoneyTime = 0;
 		for (auto & i : WorkplacesVector)
 		{
-			if (i->IsWorking())
+			if (i->bIsWorking)
 				EarnSomeMoney(3.f);
 		}
 	}
 	
-	TotalMoneyEarned -= 0.05f * DeltaTime;
+	TotalMoneyEarned -= 2.f * DeltaTime;
 	
 	if (OtherTime > 10.f)
 	{

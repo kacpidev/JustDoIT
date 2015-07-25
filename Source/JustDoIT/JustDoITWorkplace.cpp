@@ -24,9 +24,10 @@ void AJustDoITWorkplace::BeginPlay()
 void AJustDoITWorkplace::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+	bIsWorking = IsWorking();
 }
 
-bool AJustDoITWorkplace::IsWorking()
+bool AJustDoITWorkplace::IsWorking_Implementation()
 {
 	if (Computer && CDROM && Wire && Switch)
 	{
