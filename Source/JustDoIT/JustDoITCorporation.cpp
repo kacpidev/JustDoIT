@@ -17,10 +17,10 @@ AJustDoITCorporation::AJustDoITCorporation()
 void AJustDoITCorporation::BeginPlay()
 {
 	Super::BeginPlay();
-	for (TObjectIterator<AJustDoITActor> ActorItr; ActorItr; ++ActorItr)
+	for (auto actor : ActorsVector)
 	{
 		//ActorsVector.(ActorItr);
-		ActorsVector.Add(ActorItr);
+		ActorsVector.Add(actor);
 	}
 	UpdateMoneyTime = 0.f;
 }
@@ -29,8 +29,10 @@ void AJustDoITCorporation::BeginPlay()
 void AJustDoITCorporation::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+
 	UpdateMoneyTime += DeltaTime;
 	OtherTime += DeltaTime;
+
 	if (UpdateMoneyTime > 0.5f)
 	{
 		UpdateMoneyTime = 0;
@@ -47,7 +49,10 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 	{
 		OtherTime = 0.f;
 		FString TheFloatStr = FString::SanitizeFloat(TotalMoneyEarned);
-	//	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, *TheFloatStr);
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, *TheFloatStr);
+		}
 	}
 
 
