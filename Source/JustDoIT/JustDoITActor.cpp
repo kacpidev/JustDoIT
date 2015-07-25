@@ -41,7 +41,7 @@ void AJustDoITActor::OnInteraction_Implementation(const int32& ProblemType)
 	//	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("INTERACT MADAFAKA"));
 	//}
 
-	if (ProblemType == this->ProblemType)
+	if (ProblemType == 0 || ProblemType == this->ProblemType)
 	{
 		ActorState = true;
 	}
