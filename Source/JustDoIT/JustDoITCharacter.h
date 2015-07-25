@@ -7,6 +7,16 @@
 struct FHitResult;
 class UInputComponent;
 
+UENUM(BlueprintType)
+enum class E_ProblemType : uint8
+{
+	VE_NoObjectRequired	UMETA(DisplayName = "No Object Required"),
+	VE_NoCable			UMETA(DisplayName = "No Cable"),
+	VE_NoOS				UMETA(DisplayName = "No OS"),
+	VE_BrokenCdRom		UMETA(DisplayName = "Broken CD-ROM")
+
+};
+
 UCLASS(config=Game)
 class AJustDoITCharacter : public ACharacter
 {
