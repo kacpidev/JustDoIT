@@ -98,5 +98,7 @@ public:
 	UPROPERTY()
 	AJustDoITActor* CurrentInteractableActor;
 
+	UPROPERTY()
+	int32 ToolType;
 };
 

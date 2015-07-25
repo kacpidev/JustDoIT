@@ -17,10 +17,10 @@ AJustDoITCorporation::AJustDoITCorporation()
 void AJustDoITCorporation::BeginPlay()
 {
 	Super::BeginPlay();
-	for (auto actor : ActorsVector)
+	for (auto workplace : WorkplacesVector)
 	{
-		//ActorsVector.(ActorItr);
-		ActorsVector.Add(actor);
+		//WorkplacesVector.(ActorItr);
+		WorkplacesVector.Add(workplace);
 	}
 	UpdateMoneyTime = 0.f;
 }
@@ -36,9 +36,9 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 	if (UpdateMoneyTime > 0.5f)
 	{
 		UpdateMoneyTime = 0;
-		for (auto & i : ActorsVector)
+		for (auto & i : WorkplacesVector)
 		{
-			if (i->ActorState == WORKING_FINE)
+			if (i->IsWorking())
 				EarnSomeMoney(3.f);
 		}
 	}
@@ -54,10 +54,7 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, *TheFloatStr);
 		}
 	}
-
-
 }
-
 
 void AJustDoITCorporation::EarnSomeMoney(const float& money)
 {

@@ -68,7 +68,7 @@ void AJustDoITCharacter::OnFire()
 { 
 	if (CurrentInteractableActor)
 	{
-		CurrentInteractableActor->OnInteraction();
+		CurrentInteractableActor->OnInteraction(ToolType);
 	}
 }
 

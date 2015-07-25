@@ -4,7 +4,8 @@
 
 #include "JustDoITActor.h"
 #include "GameFramework/Actor.h"
-#include <vector>
+#include "JustDoITWorkplace.h"
+#include <Runtime/Core/Public/Containers/Array.h>
 #include "JustDoITCorporation.generated.h"
 UCLASS()
 class JUSTDOIT_API AJustDoITCorporation : public AActor
@@ -25,7 +26,7 @@ public:
 	
 public:
 	float TotalMoneyEarned;
-	TArray <TObjectIterator<AJustDoITActor>> ActorsVector;
+	TArray<TObjectIterator<AJustDoITWorkplace>> WorkplacesVector;
 	float UpdateMoneyTime;
 	float OtherTime;
 };
