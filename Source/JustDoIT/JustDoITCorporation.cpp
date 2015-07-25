@@ -17,11 +17,11 @@ AJustDoITCorporation::AJustDoITCorporation()
 void AJustDoITCorporation::BeginPlay()
 {
 	Super::BeginPlay();
-	for (auto workplace : WorkplacesVector)
+	for (TObjectIterator<AJustDoITWorkplace> ActorItr; ActorItr; ++ActorItr)
 	{
-		//WorkplacesVector.(ActorItr);
-		WorkplacesVector.Add(workplace);
+		WorkplacesVector.Add(ActorItr);
 	}
+
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;
 	IssueRandTime = FMath::FRandRange(1.f, 20.f);
@@ -43,7 +43,7 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 		IssueTime = 0;
 		IssueRandTime = FMath::FRandRange(1.f, 20.f);
 		int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
-		//WorkplacesVector [ErrorMachine]->GenerateError();
+		WorkplacesVector [IssueMachine]->GenerateIssue();
 
 	}
 

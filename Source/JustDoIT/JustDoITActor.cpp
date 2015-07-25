@@ -44,6 +44,10 @@ void AJustDoITActor::OnInteraction_Implementation(const int32& ProblemType)
 	if (ProblemType == 0 || ProblemType == this->ProblemType)
 	{
 		ActorState = true;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("Computer repaired"));
+		}
 	}
 
 }

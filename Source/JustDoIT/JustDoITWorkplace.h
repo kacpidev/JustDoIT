@@ -22,6 +22,8 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	bool IsWorking();
+
+	void GenerateIssue();
 	
 public:
 	UPROPERTY()
@@ -38,4 +40,5 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 		AJustDoITActor* Switch;
+
 };
