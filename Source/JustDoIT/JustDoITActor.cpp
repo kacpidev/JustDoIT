@@ -2,6 +2,7 @@
 
 #include "JustDoIT.h"
 #include "JustDoITActor.h"
+#include <Runtime/Engine/Public/Engine.h>
 
 
 // Sets default values
@@ -69,8 +70,18 @@ void AJustDoITActor::Tick( float DeltaTime )
 	}
 }
 
-void AJustDoITActor::OnInteraction() 
+void AJustDoITActor::OnStartPlayerLookAt_Implementation()
 {
-	//TODO
+}
 
+void AJustDoITActor::OnFinishPlayerLookAt_Implementation()
+{
+}
+
+void AJustDoITActor::OnInteraction_Implementation()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("INTERACT MADAFAKA"));
+	}
 }
