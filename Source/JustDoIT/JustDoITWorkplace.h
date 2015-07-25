@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "JustDoITActor.h"
 #include "JustDoITWorkplace.generated.h"
 
 UCLASS()
@@ -25,4 +26,16 @@ public:
 public:
 	UPROPERTY()
 		int32 ActorState;
+
+	UPROPERTY(BlueprintReadWrite)
+		AJustDoITActor* Computer;
+
+	UPROPERTY(BlueprintReadWrite)
+		AJustDoITActor* CDROM;
+
+	UPROPERTY(BlueprintReadWrite)
+		AJustDoITActor* Wire;
+
+	UPROPERTY(BlueprintReadWrite)
+		AJustDoITActor* Switch;
 };
