@@ -23,11 +23,14 @@ void AJustDoITWorkplace::BeginPlay()
 void AJustDoITWorkplace::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
 }
 
 bool AJustDoITWorkplace::IsWorking()
 {
+	if (Computer && CDROM && Wire && Switch)
+	{
+		return (Computer->ActorState && CDROM->ActorState && Wire->ActorState && Switch->ActorState);
+	}
 
 	return true;
 }
