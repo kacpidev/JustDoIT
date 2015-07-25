@@ -23,6 +23,8 @@ void AJustDoITCorporation::BeginPlay()
 		WorkplacesVector.Add(workplace);
 	}
 	UpdateMoneyTime = 0.f;
+	IssueTime = 0.f;
+	IssueRandTime = FMath::FRandRange(1.f, 20.f);
 }
 
 // Called every frame
@@ -30,8 +32,20 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+
+
 	UpdateMoneyTime += DeltaTime;
 	OtherTime += DeltaTime;
+	IssueTime += DeltaTime;
+
+	if (IssueTime > IssueRandTime)
+	{
+		IssueTime = 0;
+		IssueRandTime = FMath::FRandRange(1.f, 20.f);
+		int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
+		//WorkplacesVector [ErrorMachine]->GenerateError();
+
+	}
 
 	if (UpdateMoneyTime > 0.5f)
 	{

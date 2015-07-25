@@ -29,4 +29,6 @@ public:
 	TArray<TObjectIterator<AJustDoITWorkplace>> WorkplacesVector;
 	float UpdateMoneyTime;
 	float OtherTime;
+	float IssueTime;
+	float IssueRandTime;
 };
