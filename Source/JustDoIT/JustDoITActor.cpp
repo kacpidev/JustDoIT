@@ -10,7 +10,7 @@ AJustDoITActor::AJustDoITActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	ActorState = 0;
+	ActorState = true;
 }
 
 // Called when the game starts or when spawned
@@ -41,9 +41,9 @@ void AJustDoITActor::OnInteraction_Implementation(const int32& ProblemType)
 	//	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("INTERACT MADAFAKA"));
 	//}
 
-	if (ProblemType == this->ProblemType)
+	if (ProblemType == 0 || ProblemType == this->ProblemType)
 	{
-		ActorState = 0;
+		ActorState = true;
 	}
 
 }
