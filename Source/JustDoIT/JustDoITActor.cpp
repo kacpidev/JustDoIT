@@ -24,7 +24,7 @@ void AJustDoITActor::BeginPlay()
 void AJustDoITActor::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-	float Money = -1.f;
+	float Money = -0.3f;
 
 	switch (ActorState) {
 		case WORKING_FINE:
@@ -69,7 +69,8 @@ void AJustDoITActor::Tick( float DeltaTime )
 	}
 }
 
-void AJustDoITActor::OnInteraction () {
+void AJustDoITActor::OnInteraction() 
+{
 	//TODO
 
 }
