@@ -41,7 +41,7 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 		}
 	}
 	
-	TotalMoneyEarned -= 0.05f;
+	TotalMoneyEarned -= 0.05f * DeltaTime;
 	
 	if (OtherTime > 10.f)
 	{
