@@ -22,6 +22,7 @@ void AJustDoITCorporation::BeginPlay()
 		WorkplacesVector.Add(ActorItr);
 	}
 
+	Printer = TActorIterator<AJustDoITPrinter> Printr(GetWorld());
 
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;
@@ -34,30 +35,38 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 
 
-
-	UpdateMoneyTime += DeltaTime;
-	OtherTime += DeltaTime;
-	IssueTime += DeltaTime;
-
-	if (IssueTime > IssueRandTime)
+	if (Printer->IsWorking)
 	{
-		IssueTime = 0;
-		IssueRandTime = FMath::FRandRange(1.f, 20.f);
-		int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
-		WorkplacesVector [IssueMachine]->GenerateIssue();
-
+		// unspawn dollars
 	}
-
-	if (UpdateMoneyTime > 0.5f)
+	else
 	{
-		UpdateMoneyTime = 0;
-		for (auto & i : WorkplacesVector)
+
+		UpdateMoneyTime += DeltaTime;
+		IssueTime += DeltaTime;
+
+		if (IssueTime > IssueRandTime)
 		{
-			if (i->IsWorking())
-				EarnSomeMoney(3.f);
+			IssueTime = 0;
+			IssueRandTime = FMath::FRandRange(1.f, 20.f);
+			int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
+			WorkplacesVector [IssueMachine]->GenerateIssue();
+
+		}
+
+		if (UpdateMoneyTime > 0.5f)
+		{
+			UpdateMoneyTime = 0;
+			for (auto & i : WorkplacesVector)
+			{
+				if (i->IsWorking())
+					EarnSomeMoney(3.f);
+			}
 		}
 	}
 	
+	//working costs + displaying money ammount
+	OtherTime += DeltaTime;
 	TotalMoneyEarned -= 0.05f * DeltaTime;
 	
 	if (OtherTime > 10.f)
