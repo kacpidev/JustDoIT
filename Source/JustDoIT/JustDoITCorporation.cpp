@@ -11,6 +11,7 @@ AJustDoITCorporation::AJustDoITCorporation()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	TotalMoneyEarned = 0;
+	
 }
 
 // Called when the game starts or when spawned
@@ -22,6 +23,11 @@ void AJustDoITCorporation::BeginPlay()
 		WorkplacesVector.Add(ActorItr);
 	}
 
+	for (TActorIterator< AJustDoITPrinter > ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		PrinterVector.Add(ActorItr);
+		break;
+	}
 
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;
@@ -34,27 +40,33 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 
 
-
-	UpdateMoneyTime += DeltaTime;
-	OtherTime += DeltaTime;
-	IssueTime += DeltaTime;
-
-	if (IssueTime > IssueRandTime)
+	if (PrinterVector.Num() > 0 && PrinterVector[0]->IsWorking)
 	{
-		IssueTime = 0;
-		IssueRandTime = FMath::FRandRange(1.f, 20.f);
-		int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
-		WorkplacesVector [IssueMachine]->GenerateIssue();
-
+		// unspawn dollars
 	}
-
-	if (UpdateMoneyTime > 0.5f)
+	else
 	{
-		UpdateMoneyTime = 0;
-		for (auto & i : WorkplacesVector)
+
+		UpdateMoneyTime += DeltaTime;
+		IssueTime += DeltaTime;
+
+		if (IssueTime > IssueRandTime)
 		{
-			if (i->bIsWorking)
-				EarnSomeMoney(3.f);
+			IssueTime = 0;
+			IssueRandTime = FMath::FRandRange(1.f, 20.f);
+			int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
+			WorkplacesVector [IssueMachine]->GenerateIssue();
+
+		}
+
+		if (UpdateMoneyTime > 0.5f)
+		{
+			UpdateMoneyTime = 0;
+			for (auto & i : WorkplacesVector)
+			{
+				if (i->IsWorking())
+					EarnSomeMoney(3.f);
+			}
 		}
 	}
 	

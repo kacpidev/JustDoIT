@@ -5,6 +5,7 @@
 #include "JustDoITActor.h"
 #include "GameFramework/Actor.h"
 #include "JustDoITWorkplace.h"
+#include "JustDoITPrinter.h"
 #include <Runtime/Core/Public/Containers/Array.h>
 #include <Runtime/Engine/Public/EngineUtils.h>
 #include "JustDoITCorporation.generated.h"
@@ -29,6 +30,7 @@ public:
 public:
 	float TotalMoneyEarned;
 	TArray<TActorIterator<AJustDoITWorkplace>> WorkplacesVector;
+	TArray<TActorIterator<AJustDoITPrinter>> PrinterVector;
 	float UpdateMoneyTime;
 	float OtherTime;
 	float IssueTime;
