@@ -35,4 +35,7 @@ public:
 	float OtherTime;
 	float IssueTime;
 	float IssueRandTime;
+
+	UPROPERTY(BlueprintReadWrite)
+		int32 ExclamationMarks;
 };

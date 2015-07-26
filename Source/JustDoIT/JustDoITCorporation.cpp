@@ -28,7 +28,7 @@ void AJustDoITCorporation::BeginPlay()
 		PrinterVector.Add(ActorItr);
 		break;
 	}
-
+	ExclamationMarks = 0;
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;
 	IssueRandTime = FMath::FRandRange(1.f, 20.f);
@@ -39,6 +39,23 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	int32 exclamations = 0;
+	for (auto & i : WorkplacesVector)
+	{
+		if (!(i->IsWorking()))
+			exclamations += 1;
+	}
+
+	if (exclamations == 0 || exclamations == 1)
+		ExclamationMarks = 0;
+	else if (exclamations == 2 )
+		ExclamationMarks = 1;
+	else if (exclamations == 3)
+		ExclamationMarks = 2;
+	else
+		ExclamationMarks = 3;
+
+	ExclamationMarks = exclamations;
 
 	if (PrinterVector.Num() > 0 && PrinterVector[0]->IsWorking)
 	{
@@ -46,14 +63,14 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 	}
 	else
 	{
-
+		 
 		UpdateMoneyTime += DeltaTime;
 		IssueTime += DeltaTime;
 
 		if (IssueTime > IssueRandTime)
 		{
 			IssueTime = 0;
-			IssueRandTime = FMath::FRandRange(1.f, 20.f);
+			IssueRandTime = FMath::FRandRange(5.f, 10.f);
 			int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
 			WorkplacesVector [IssueMachine]->GenerateIssue();
 

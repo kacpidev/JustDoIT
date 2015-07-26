@@ -41,8 +41,7 @@ void AJustDoITWorkplace::GenerateIssue()
 {
  
 	int32 problemSource = FMath::RandHelper(4);
-	Wire->ActorState = false;
-	return;
+
 	switch (problemSource)
 	{
 		case (0):
