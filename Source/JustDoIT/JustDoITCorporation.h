@@ -30,7 +30,7 @@ public:
 public:
 	float TotalMoneyEarned;
 	TArray<TActorIterator<AJustDoITWorkplace>> WorkplacesVector;
-	TActorIterator<AJustDoITPrinter> Printer;
+	TArray<TActorIterator<AJustDoITPrinter>> PrinterVector;
 	float UpdateMoneyTime;
 	float OtherTime;
 	float IssueTime;

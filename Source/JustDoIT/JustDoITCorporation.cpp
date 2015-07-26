@@ -11,6 +11,7 @@ AJustDoITCorporation::AJustDoITCorporation()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	TotalMoneyEarned = 0;
+	
 }
 
 // Called when the game starts or when spawned
@@ -22,7 +23,11 @@ void AJustDoITCorporation::BeginPlay()
 		WorkplacesVector.Add(ActorItr);
 	}
 
-	Printer = TActorIterator<AJustDoITPrinter> Printr(GetWorld());
+	for (TActorIterator< AJustDoITPrinter > ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		PrinterVector.Add(ActorItr);
+		break;
+	}
 
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;
@@ -35,7 +40,7 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 
 
-	if (Printer->IsWorking)
+	if (PrinterVector.Num() > 0 && PrinterVector[0]->IsWorking)
 	{
 		// unspawn dollars
 	}
