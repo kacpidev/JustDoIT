@@ -29,17 +29,18 @@ public:
 	AJustDoITCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Hands)
 		float BaseTurnRate;
 
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Hands)
 		float BaseLookUpRate;
 
 protected:
 
 	/** Fires a projectile. */
-	void OnFire();
+	void OnFire1();
+	void OnFire2();
 
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
@@ -99,6 +100,12 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	UFUNCTION(BlueprintNativeEvent)
+		void UpdateLeftTool();
+
+	UFUNCTION(BlueprintNativeEvent)
+		void UpdateRightTool();
+
 	UFUNCTION()
 	FHitResult Raycast(float Range = 0.f);
 
@@ -108,7 +115,19 @@ public:
 	UPROPERTY()
 	AJustDoITActor* CurrentInteractableActor;
 
-	UPROPERTY()
-	int32 ToolType;
+	UPROPERTY(BlueprintReadWrite)
+		int32 ToolTypeL = 0;	
+	
+	UPROPERTY(BlueprintReadWrite)
+		int32 ToolTypeR = 0;
+
+	/** Static Mesh Comp, Set In BP Default Properties */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = StaticMeshComponents)
+	UStaticMeshComponent * LeftHand;
+	
+	/** Static Mesh Comp, Set In BP Default Properties */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = StaticMeshComponents)
+	UStaticMeshComponent * RightHand;
+
 };
 

@@ -49,7 +49,8 @@ void AJustDoITCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AJustDoITCharacter::TouchStarted);
 	if( EnableTouchscreenMovement(InputComponent) == false )
 	{
-		InputComponent->BindAction("Fire", IE_Pressed, this, &AJustDoITCharacter::OnFire);
+		InputComponent->BindAction("Fire1", IE_Pressed, this, &AJustDoITCharacter::OnFire1);
+		InputComponent->BindAction("Fire2", IE_Pressed, this, &AJustDoITCharacter::OnFire2);
 	}
 	
 	InputComponent->BindAxis("MoveForward", this, &AJustDoITCharacter::MoveForward);
@@ -64,11 +65,28 @@ void AJustDoITCharacter::SetupPlayerInputComponent(class UInputComponent* InputC
 	InputComponent->BindAxis("LookUpRate", this, &AJustDoITCharacter::LookUpAtRate);
 }
 
-void AJustDoITCharacter::OnFire()
+void AJustDoITCharacter::OnFire1()
 { 
 	if (CurrentInteractableActor)
 	{
-		CurrentInteractableActor->OnInteraction(ToolType);
+		if (ToolTypeL == 0 && CurrentInteractableActor->ToolType != 0)
+		{
+			ToolTypeL = CurrentInteractableActor->ToolType;
+			UpdateLeftTool();
+		}
+		else
+			CurrentInteractableActor->OnInteraction(ToolTypeL);
+	}
+}
+
+void AJustDoITCharacter::OnFire2()
+{
+	if (CurrentInteractableActor)
+	{
+		if (ToolTypeR == 0 && CurrentInteractableActor->ToolType != 0)
+			ToolTypeR = CurrentInteractableActor->ToolType;
+		else
+			CurrentInteractableActor->OnInteraction(ToolTypeR);
 	}
 }
 
@@ -92,7 +110,7 @@ void AJustDoITCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVe
 	}
 	if( ( FingerIndex == TouchItem.FingerIndex ) && (TouchItem.bMoved == false) )
 	{
-		OnFire();
+		OnFire1();
 	}
 	TouchItem.bIsPressed = false;
 }
@@ -203,6 +221,15 @@ void AJustDoITCharacter::Tick(float DeltaTime)
 			CurrentInteractableActor->OnStartPlayerLookAt();
 	}
 }
+
+void AJustDoITCharacter::UpdateLeftTool_Implementation()
+{
+}
+
+void AJustDoITCharacter::UpdateRightTool_Implementation()
+{
+}
+
 
 #define COLLISION_TRACE ECC_GameTraceChannel1
 FHitResult AJustDoITCharacter::Raycast(float Range)
