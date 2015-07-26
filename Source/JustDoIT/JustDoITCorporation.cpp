@@ -17,10 +17,11 @@ AJustDoITCorporation::AJustDoITCorporation()
 void AJustDoITCorporation::BeginPlay()
 {
 	Super::BeginPlay();
-	for (TObjectIterator<AJustDoITWorkplace> ActorItr; ActorItr; ++ActorItr)
+	for (TActorIterator< AJustDoITWorkplace > ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
 		WorkplacesVector.Add(ActorItr);
 	}
+
 
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;

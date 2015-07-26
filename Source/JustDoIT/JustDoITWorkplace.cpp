@@ -39,7 +39,7 @@ bool AJustDoITWorkplace::IsWorking_Implementation()
 
 void AJustDoITWorkplace::GenerateIssue()
 {
-/* 
+ 
 	int32 problemSource = FMath::RandHelper(4);
 	switch (problemSource)
 	{
@@ -78,18 +78,18 @@ void AJustDoITWorkplace::GenerateIssue()
 		default:
 			break;
 	}
-*/	
+	
 	
 
 	//debug version - fix without any special objects
-	if (Computer)
-	{
-		Computer->ActorState = false;
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("Computer is broken"));
-		}
-	}
+	//if (Computer)
+	//{
+	//	Computer->ActorState = false;
+	//	if (GEngine)
+	//	{
+	//		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("Computer is broken"));
+	//	}
+	//}
 
 
 }
