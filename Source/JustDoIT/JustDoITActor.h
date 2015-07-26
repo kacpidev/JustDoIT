@@ -33,4 +33,6 @@ public:
 	bool ActorState;
 	UPROPERTY(BlueprintReadWrite)
 	int32 ProblemType;
+	UPROPERTY(BlueprintReadWrite)
+		int32 ToolType = 0;
 };

@@ -70,9 +70,7 @@ void AJustDoITCorporation::Tick( float DeltaTime )
 		}
 	}
 	
-	//working costs + displaying money ammount
-	OtherTime += DeltaTime;
-	TotalMoneyEarned -= 0.05f * DeltaTime;
+	TotalMoneyEarned -= 2.f * DeltaTime;
 	
 	if (OtherTime > 10.f)
 	{

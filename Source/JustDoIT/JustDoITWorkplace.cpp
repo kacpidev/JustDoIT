@@ -24,9 +24,10 @@ void AJustDoITWorkplace::BeginPlay()
 void AJustDoITWorkplace::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+	bIsWorking = IsWorking();
 }
 
-bool AJustDoITWorkplace::IsWorking()
+bool AJustDoITWorkplace::IsWorking_Implementation()
 {
 	if (Computer && CDROM && Wire && Switch)
 	{
@@ -40,6 +41,8 @@ void AJustDoITWorkplace::GenerateIssue()
 {
  
 	int32 problemSource = FMath::RandHelper(4);
+	Wire->ActorState = false;
+	return;
 	switch (problemSource)
 	{
 		case (0):
