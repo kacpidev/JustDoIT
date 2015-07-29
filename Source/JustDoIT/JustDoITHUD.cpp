@@ -9,7 +9,7 @@
 AJustDoITHUD::AJustDoITHUD()
 {
 	// Set the crosshair texture
-	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/FirstPerson/Textures/FirstPersonCrosshair"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/JustDoIT/Textures/dot"));
 	CrosshairTex = CrosshiarTexObj.Object;
 }
 
@@ -30,6 +30,7 @@ void AJustDoITHUD::DrawHUD()
 	// draw the crosshair
 	FCanvasTileItem TileItem( CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
-	Canvas->DrawItem( TileItem );
+	if (showCrosshair)
+		Canvas->DrawItem( TileItem );
 }
 

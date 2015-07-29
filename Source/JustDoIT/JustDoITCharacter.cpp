@@ -204,17 +204,6 @@ bool AJustDoITCharacter::EnableTouchscreenMovement(class UInputComponent* InputC
 	return bResult;
 }
 
-// Called every frame
-void AJustDoITCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("WE are using JustDoITCharacter :)"));
-	}
-}
-
 void AJustDoITCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

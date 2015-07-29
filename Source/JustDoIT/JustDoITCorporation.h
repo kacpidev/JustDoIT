@@ -28,7 +28,9 @@ public:
 	void EarnSomeMoney(const float& money);
 	
 public:
+	UPROPERTY(BlueprintReadWrite)
 	float TotalMoneyEarned;
+
 	TArray<TActorIterator<AJustDoITWorkplace>> WorkplacesVector;
 	TArray<TActorIterator<AJustDoITPrinter>> PrinterVector;
 	float UpdateMoneyTime;
