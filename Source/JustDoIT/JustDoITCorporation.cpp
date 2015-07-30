@@ -71,7 +71,7 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 		if (IssueTime > IssueRandTime)
 		{
 			IssueTime = 0;
-			IssueRandTime = FMath::FRandRange(5.f, 10.f);
+			IssueRandTime = FMath::FRandRange(3.f, 7.f);
 			int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
 			WorkplacesVector[IssueMachine]->GenerateIssue();
 
@@ -85,7 +85,7 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 			}
 			else
 			{
-				EarnSomeMoney(5.f*DeltaTime);
+				EarnSomeMoney(4.f*DeltaTime);
 			}
 		}
 
