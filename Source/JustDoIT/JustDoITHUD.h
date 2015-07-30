@@ -15,8 +15,18 @@ public:
 	virtual void DrawHUD() override;
 
 	UPROPERTY(BlueprintReadWrite)
-		bool showCrosshair = false;
+		bool bShowCrosshair = false;
+	
+	UPROPERTY(BlueprintReadWrite)
+		bool bInGamePlay = false;
 
+	UPROPERTY(BlueprintReadWrite)
+		float GameTime;
+	UPROPERTY(BlueprintReadWrite)
+		int32 ProblemsSolved;
+
+	UFUNCTION(BlueprintNativeEvent)
+		void DrawGamePlayHUD();
 private:
 	/** Crosshair asset pointer */
 		class UTexture2D* CrosshairTex;
