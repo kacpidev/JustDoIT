@@ -5,6 +5,7 @@
 #include "Engine/Canvas.h"
 #include "TextureResource.h"
 #include "CanvasItem.h"
+#include <Runtime/Core/Public/Math/Color.h>
 
 AJustDoITHUD::AJustDoITHUD()
 {
@@ -30,7 +31,16 @@ void AJustDoITHUD::DrawHUD()
 	// draw the crosshair
 	FCanvasTileItem TileItem( CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
-	if (showCrosshair)
+	if (bShowCrosshair)
 		Canvas->DrawItem( TileItem );
+	if (bInGamePlay)
+	{
+		DrawGamePlayHUD();
+	}
+
 }
 
+void AJustDoITHUD::DrawGamePlayHUD_Implementation()
+{
+	
+}

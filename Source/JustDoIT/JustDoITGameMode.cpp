@@ -12,6 +12,8 @@ AJustDoITGameMode::AJustDoITGameMode()
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/JustDoIT/Blueprints/BP_JustDoITCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
+
 	// use our custom HUD class
-	HUDClass = AJustDoITHUD::StaticClass();
+	static ConstructorHelpers::FClassFinder<AHUD> HUDClassFinder(TEXT("/Game/JustDoIT/Blueprints/BP_JustDoITHUD"));
+	HUDClass = HUDClassFinder.Class;
 }
