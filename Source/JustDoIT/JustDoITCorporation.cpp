@@ -71,7 +71,7 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 		if (IssueTime > IssueRandTime)
 		{
 			IssueTime = 0;
-			IssueRandTime = FMath::FRandRange(5.f, 10.f);
+			IssueRandTime = FMath::FRandRange(3.f, 6.f);
 			int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
 			WorkplacesVector[IssueMachine]->GenerateIssue();
 
@@ -84,11 +84,11 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 
 			if (!i->IsWorking())
 			{
-				EarnSomeMoney(-32.f*DeltaTime);
+				EarnSomeMoney(-15.f*DeltaTime);
 			}
 			else
 			{
-				EarnSomeMoney(5.f*DeltaTime);
+				EarnSomeMoney(3.f*DeltaTime);
 			}
 		
 			ProblemsSolved += i->ProblemsSolved;
@@ -101,16 +101,6 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 		else if (TotalMoneyEarned < -100.0f)
 		{
 			TotalMoneyEarned = 100.0f;
-		}
-
-		if (OtherTime > 10.f)
-		{
-			OtherTime = 0.f;
-			FString TheFloatStr = FString::SanitizeFloat(TotalMoneyEarned);
-			if (GEngine)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, *TheFloatStr);
-			}
 		}
 	}
 }

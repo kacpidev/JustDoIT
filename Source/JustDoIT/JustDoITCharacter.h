@@ -114,10 +114,10 @@ public:
 	AJustDoITActor* CurrentInteractableActor;
 
 	UPROPERTY(BlueprintReadWrite)
-		int32 ToolTypeL = 0;	
+		uint8 ToolTypeL = 0;
 	
 	UPROPERTY(BlueprintReadWrite)
-		int32 ToolTypeR = 0;
+		uint8 ToolTypeR = 0;
 
 	/** Static Mesh Comp, Set In BP Default Properties */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = StaticMeshComponents)
@@ -126,8 +126,5 @@ public:
 	/** Static Mesh Comp, Set In BP Default Properties */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = StaticMeshComponents)
 	UStaticMeshComponent * RightHand;
-
-	UPROPERTY(BlueprintReadWrite)
-		int32 ProblemsSolved;
 };
 

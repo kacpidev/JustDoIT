@@ -44,8 +44,6 @@ void AJustDoITActor::OnInteraction_Implementation(const int32& ProblemType)
 	if (ActorState == false && (this->ProblemType == 0 || ProblemType == this->ProblemType))
 	{
 		ActorState = true;
-
-		ProblemsSolved++;
 	}
 
 }
