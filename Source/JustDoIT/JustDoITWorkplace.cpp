@@ -31,7 +31,7 @@ bool AJustDoITWorkplace::IsWorking_Implementation()
 {
 	if (Computer && CDROM && Wire && Switch)
 	{
-		return (Computer->ActorState && CDROM->ActorState && Wire->ActorState && Switch->ActorState);
+		return (Computer->ActorState && CDROM->ActorState && Wire->ActorState && Switch->ActorState && Keyboard->ActorState);
 	}
 
 	return true;
@@ -40,7 +40,7 @@ bool AJustDoITWorkplace::IsWorking_Implementation()
 void AJustDoITWorkplace::GenerateIssue()
 {
  
-	int32 problemSource = FMath::RandHelper(4);
+	int32 problemSource = FMath::RandHelper(5);
 
 	switch (problemSource)
 	{
@@ -76,21 +76,16 @@ void AJustDoITWorkplace::GenerateIssue()
 			}
 			break;
 		}
+		case (4) :
+		{
+			if (Switch)
+			{
+				Keyboard->ActorState = false;
+			}
+			break;
+		}
 		default:
 			break;
 	}
 	
-	
-
-	//debug version - fix without any special objects
-	//if (Computer)
-	//{
-	//	Computer->ActorState = false;
-	//	if (GEngine)
-	//	{
-	//		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, TEXT("Computer is broken"));
-	//	}
-	//}
-
-
 }

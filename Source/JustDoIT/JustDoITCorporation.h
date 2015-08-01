@@ -40,4 +40,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 		int32 ExclamationMarks;
+
+	UPROPERTY(BlueprintReadWrite)
+		int32 ProblemsSolved = 0;
 };

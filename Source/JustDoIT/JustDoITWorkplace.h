@@ -43,5 +43,10 @@ public:
 		AJustDoITActor* Switch;
 
 	UPROPERTY(BlueprintReadWrite)
+		AJustDoITActor* Keyboard;
+
+	UPROPERTY(BlueprintReadWrite)
 		bool bIsWorking;
+
+	int32 ProblemsSolved = 0;
 };

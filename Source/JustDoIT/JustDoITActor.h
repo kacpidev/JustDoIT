@@ -35,4 +35,6 @@ public:
 	int32 ProblemType;
 	UPROPERTY(BlueprintReadWrite)
 		int32 ToolType = 0;
+
+	int32 ProblemsSolved = 0;
 };

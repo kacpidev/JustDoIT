@@ -127,5 +127,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = StaticMeshComponents)
 	UStaticMeshComponent * RightHand;
 
+	UPROPERTY(BlueprintReadWrite)
+		int32 ProblemsSolved;
 };
 

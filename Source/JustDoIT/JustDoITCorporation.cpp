@@ -79,6 +79,9 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 
 		for (auto & i : WorkplacesVector)
 		{
+
+			ProblemsSolved = 0;
+
 			if (!i->IsWorking())
 			{
 				EarnSomeMoney(-32.f*DeltaTime);
@@ -87,6 +90,17 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 			{
 				EarnSomeMoney(5.f*DeltaTime);
 			}
+		
+			ProblemsSolved += i->ProblemsSolved;
+		}
+
+		if (TotalMoneyEarned > 6100.0f)
+		{
+			TotalMoneyEarned = 6100.0f;
+		}
+		else if (TotalMoneyEarned < -100.0f)
+		{
+			TotalMoneyEarned = 100.0f;
 		}
 
 		if (OtherTime > 10.f)

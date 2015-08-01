@@ -76,7 +76,7 @@ void AJustDoITCharacter::OnFire1()
 		else
 		{
 			CurrentInteractableActor->OnInteraction(ToolTypeL);
-			//if (CurrentInteractableActor->ToolType != 0)
+			if (CurrentInteractableActor->ToolType != 0)
 				ToolTypeL = 0;
 		}
 		UpdateLeftTool();
@@ -94,7 +94,7 @@ void AJustDoITCharacter::OnFire2()
 		else
 		{
 			CurrentInteractableActor->OnInteraction(ToolTypeR);
-			//if (CurrentInteractableActor->ToolType != 0)
+			if (CurrentInteractableActor->ToolType != 0)
 				ToolTypeR = 0;
 		}
 		UpdateRightTool();
