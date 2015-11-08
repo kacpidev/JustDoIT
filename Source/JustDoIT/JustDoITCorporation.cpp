@@ -18,21 +18,12 @@ AJustDoITCorporation::AJustDoITCorporation()
 void AJustDoITCorporation::BeginPlay()
 {
 	Super::BeginPlay();
-	for (TActorIterator< AJustDoITWorkplace > ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		WorkplacesVector.Add(ActorItr);
-	}
 
-	for (TActorIterator< AJustDoITPrinter > ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		PrinterVector.Add(ActorItr);
-		break;
-	}
 	TotalMoneyEarned = 3000.f;
 	ExclamationMarks = 0;
 	UpdateMoneyTime = 0.f;
 	IssueTime = 0.f;
-	IssueRandTime = FMath::FRandRange(5.f, 7.f);
+	IssueRandTime = FMath::FRandRange(4.f, 7.f);
 }
 
 // Called every frame
@@ -58,50 +49,42 @@ void AJustDoITCorporation::Tick(float DeltaTime)
 
 	ExclamationMarks = exclamations;
 
-	if (PrinterVector.Num() > 0 && PrinterVector[0]->IsWorking)
+	UpdateMoneyTime += DeltaTime;
+	IssueTime += DeltaTime;
+
+	if (IssueTime > IssueRandTime)
 	{
-		// unspawn dollars
+		IssueTime = 0;
+		IssueRandTime = FMath::FRandRange(4.f, 7.f);
+		int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
+		WorkplacesVector[IssueMachine]->GenerateIssue();
+
 	}
-	else
+
+	for (auto & i : WorkplacesVector)
 	{
 
-		UpdateMoneyTime += DeltaTime;
-		IssueTime += DeltaTime;
+		ProblemsSolved = 0;
 
-		if (IssueTime > IssueRandTime)
+		if (!i->IsWorking())
 		{
-			IssueTime = 0;
-			IssueRandTime = FMath::FRandRange(3.f, 6.f);
-			int32 IssueMachine = FMath::RandHelper(WorkplacesVector.Num());
-			WorkplacesVector[IssueMachine]->GenerateIssue();
-
+			EarnSomeMoney(-12.f*DeltaTime);
+		}
+		else
+		{
+			EarnSomeMoney(3.f*DeltaTime);
 		}
 
-		for (auto & i : WorkplacesVector)
-		{
+		ProblemsSolved += i->ProblemsSolved;
+	}
 
-			ProblemsSolved = 0;
-
-			if (!i->IsWorking())
-			{
-				EarnSomeMoney(-15.f*DeltaTime);
-			}
-			else
-			{
-				EarnSomeMoney(3.f*DeltaTime);
-			}
-		
-			ProblemsSolved += i->ProblemsSolved;
-		}
-
-		if (TotalMoneyEarned > 6100.0f)
-		{
-			TotalMoneyEarned = 6100.0f;
-		}
-		else if (TotalMoneyEarned < -100.0f)
-		{
-			TotalMoneyEarned = 100.0f;
-		}
+	if (TotalMoneyEarned > 6100.0f)
+	{
+		TotalMoneyEarned = 6100.0f;
+	}
+	else if (TotalMoneyEarned < -100.0f)
+	{
+		TotalMoneyEarned = 100.0f;
 	}
 }
 

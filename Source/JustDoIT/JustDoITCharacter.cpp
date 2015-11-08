@@ -248,7 +248,7 @@ FHitResult AJustDoITCharacter::Raycast(float Range)
 	FCollisionQueryParams TraceParams(FName("InteractionTrace"), true, this);
 	TraceParams.bTraceAsyncScene = true;
 
-	GetWorld()->LineTraceSingle(HitResult, StartTrace, EndTrace, COLLISION_TRACE, TraceParams);
+	GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, COLLISION_TRACE, TraceParams);
 
 	return HitResult;
 }

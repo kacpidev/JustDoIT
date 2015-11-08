@@ -30,9 +30,9 @@ public:
 public:
 	UPROPERTY(BlueprintReadWrite)
 	float TotalMoneyEarned;
-
-	TArray<TActorIterator<AJustDoITWorkplace>> WorkplacesVector;
-	TArray<TActorIterator<AJustDoITPrinter>> PrinterVector;
+	UPROPERTY(BlueprintReadWrite)
+	TArray<AJustDoITWorkplace*> WorkplacesVector;
+	
 	float UpdateMoneyTime;
 	float OtherTime;
 	float IssueTime;
